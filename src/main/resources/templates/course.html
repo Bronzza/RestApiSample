@@ -1,28 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeLeaf.org">
+<html xmlns:th="http://www.thymeLeaf.org" lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Create and add programmer</title>
+    <title>Student CRUD Operation</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="container" align="center">
+    <table class="table">
+        <caption>List of all the courses</caption>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Sections</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${allCourses}">
+            <td th:text="${course.name}">Name</td>
+            <td th:text="${course.price}">Price</td>
+            <td>
+                <table class="table-section">
+                    <tr th: each="section : ${course.sections}">
+                        <td th: text="${section.name}">Section name</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <a class="button" th:href="@{'/update/' + ${course.id}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="button-delete" th:href="@{'/delete/' + ${course.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     <br/>
-    <form action="#" th:action="@{/saveproducer}" th:object="${producerDto}" method="post">
-        <table class="table">
-            <caption>Create new producer</caption>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" th:field="*{name}"/></td>
-            </tr>
-
-            <tr>
-                <td colspan="2">
-                    <button class="button" type="submit">Save</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <a class="button" th:href="@{'/new'}">Create new product</a>
 </div>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<form th:action="@{/registration}">
+    <div>
+        <button type="submit">To registration page</button>
+    </div>
+</form>
 </body>
 </html>

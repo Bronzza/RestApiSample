@@ -23,6 +23,6 @@ public class CourseEntity extends CreatebleEntity {
     @Column(name = "price")
     private Long price;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course")
     private List<SectionEntity> sections = new ArrayList<>();
 }

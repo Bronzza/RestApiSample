@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Accessors(chain = true)
 public class SectionEntity extends CreatebleEntity {
 
-    @Column(name = "section")
+    @Column(name = "name")
     private String name;
 
     @ManyToOne

@@ -3,10 +3,14 @@ package lifeapplication.demo.dto.mapper;
 import lifeapplication.demo.dto.CourseDto;
 import lifeapplication.demo.entities.CourseEntity;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -30,13 +34,25 @@ public class ManualCourseMapper implements AbstractMapper<CourseEntity, CourseDt
     @Override
     public CourseDto toDto(CourseEntity entity) {
         CourseDto courseDto = new CourseDto();
+
         if (Objects.nonNull(entity.getId())) {
             courseDto.setId(entity.getId());
         }
+        if (Objects.nonNull(entity.getCreatedDate())) {
+            courseDto.setCreatedDate(new Date(entity.getCreatedDate()));
+        }
+
         return courseDto.setName(entity.getName())
+
                 .setPrice(entity.getPrice())
                 .setSections(entity.getSections().stream()
-                .map(sectionMapper::toDto)
-                .collect(Collectors.toList()));
+                        .map(sectionMapper::toDto)
+                        .collect(Collectors.toList()));
+    }
+
+    public List<CourseDto> toListDto (List <CourseEntity> listOfEntities){
+        return listOfEntities.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 }

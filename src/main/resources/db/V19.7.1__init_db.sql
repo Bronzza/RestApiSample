@@ -1,6 +1,6 @@
 create TABLE users
 (
-    id           int NOT NULL
+    id           SERIAL NOT NULL
         constraint users_pk primary key,
     created_date bigint,
     login        VARCHAR(45),
@@ -12,15 +12,15 @@ create TABLE users
 
 create TABLE role
 (
-    id   int NOT NULL
+    id   SERIAL NOT NULL
         constraint role_pk primary key,
     role VARCHAR(500)
 );
 
 create TABLE user_role
 (
-    user_id int,
-    role_id int
+    user_id SERIAL,
+    role_id SERIAL
 
 );
 
@@ -32,7 +32,7 @@ ALTER TABLE user_role
 
 create TABLE course
 (
-    id           int NOT NULL
+    id           SERIAL NOT NULL
         constraint course_pk primary key,
     created_date bigint,
     name         VARCHAR(45),
@@ -41,7 +41,7 @@ create TABLE course
 
 create TABLE section
 (
-    id           int NOT NULL
+    id           SERIAL NOT NULL
         constraint section_pk primary key,
     created_date bigint,
     name         VARCHAR(45),
@@ -54,7 +54,7 @@ ALTER TABLE section
 
 create TABLE lesson
 (
-    id           int NOT NULL
+    id           SERIAL NOT NULL
         constraint lesson_pk primary key,
     created_date bigint,
     content      VARCHAR(500),
@@ -63,7 +63,7 @@ create TABLE lesson
 
 create TABLE comment
 (
-    id           int NOT NULL
+    id           SERIAL NOT NULL
         constraint comment_pk primary key,
     created_date bigint,
     content      VARCHAR(500),
