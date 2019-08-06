@@ -1,5 +1,6 @@
 package lifeapplication.demo.services;
 
+import lifeapplication.demo.cache.ListCache;
 import lifeapplication.demo.dto.CourseDto;
 import lifeapplication.demo.dto.SpecificationRequest;
 import lifeapplication.demo.dto.mapper.ManualCourseMapper;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,8 @@ import static lifeapplication.demo.dto.SpecificationTransformer.buildCriteria;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CourseService implements BaseService<CourseDto> {
+
+    private static final ListCache <CourseEntity, SpecificationRequest> CACHE = new ListCache<>();
 
     private final CourseRepository courseRepository;
 
@@ -35,6 +40,11 @@ public class CourseService implements BaseService<CourseDto> {
                 .collect(Collectors.toList());
     }
 
+    @PostConstruct
+    private void initCache(){
+        CACHE.initFunctions(this::getAllByRequest, this::getAllByIds);
+    }
+
     @Override
     public CourseDto getByName(String name) {
         return null;
@@ -43,6 +53,11 @@ public class CourseService implements BaseService<CourseDto> {
     @Override
     public CourseDto getById(Long id) {
         return courseMapper.toDto(courseRepository.findById(id).get());
+    }
+
+
+    public List<CourseEntity> getAllByIds(List<Long> listIds) {
+        return courseRepository.findAllByIdIn(listIds);
     }
 
     public CourseEntity getEntityById(Long id) {
@@ -54,13 +69,19 @@ public class CourseService implements BaseService<CourseDto> {
         courseRepository.save(courseMapper.toEntity(courseDto));
     }
 
+
     private List<CourseEntity> getAllByRequest(SpecificationRequest request) {
         SpecificationCriteria criteria = buildCriteria(request);
         Specification <CourseEntity> specification = courseSpecificationFactory.build(criteria);
         return courseRepository.findAll(specification);
     }
 
+    private List<CourseEntity> getAllByRequestWithCach(SpecificationRequest request){
+       return CACHE.getEntities(request);
+    }
+
+    @Transactional
     public List <CourseDto> getAll (SpecificationRequest request){
-        return courseMapper.toListDto(getAllByRequest(request));
+        return courseMapper.toListDto(getAllByRequestWithCach(request));
     }
 }

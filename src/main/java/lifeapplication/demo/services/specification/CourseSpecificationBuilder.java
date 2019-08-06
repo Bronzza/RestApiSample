@@ -6,7 +6,7 @@ import static lifeapplication.demo.utils.SpecificationCriteriaUtil.buildRange;
 
 public class CourseSpecificationBuilder<T> extends CommonSpecificationBuilder<T> {
 
-    private final static String COST_KEY = "cost";
+    private final static String COST_KEY = "price";
 
     @Override
     public Specification<T> build(SpecificationCriteria criteria) {
