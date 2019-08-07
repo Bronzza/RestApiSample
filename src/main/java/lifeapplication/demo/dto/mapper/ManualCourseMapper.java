@@ -26,6 +26,8 @@ public class ManualCourseMapper implements AbstractMapper<CourseEntity, CourseDt
         CourseEntity courseEntity = new CourseEntity();
         return courseEntity.setName(dto.getName())
                 .setPrice(dto.getPrice())
+                .setBeginDate(dto.getBeginDate())
+                .setEndDate(dto.getEndDate())
                 .setSections(dto.getSections().stream()
                         .map(sectionMapper::toEntity)
                         .collect(Collectors.toList()));
@@ -45,6 +47,8 @@ public class ManualCourseMapper implements AbstractMapper<CourseEntity, CourseDt
         return courseDto.setName(entity.getName())
 
                 .setPrice(entity.getPrice())
+                .setBeginDate(entity.getBeginDate())
+                .setEndDate(entity.getEndDate())
                 .setSections(entity.getSections().stream()
                         .map(sectionMapper::toDto)
                         .collect(Collectors.toList()));

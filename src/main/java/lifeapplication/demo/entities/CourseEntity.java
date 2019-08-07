@@ -23,6 +23,12 @@ public class CourseEntity extends CreatebleEntity {
     @Column(name = "price")
     private Long price;
 
+    @Column (name = "begin_date")
+    private Long beginDate;
+
+    @Column (name = "end_date")
+    private Long endDate;
+
     @OneToMany(mappedBy = "course")
     private List<SectionEntity> sections = new ArrayList<>();
 }

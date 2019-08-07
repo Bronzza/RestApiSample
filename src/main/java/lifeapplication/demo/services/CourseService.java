@@ -1,6 +1,7 @@
 package lifeapplication.demo.services;
 
 import lifeapplication.demo.cache.ListCache;
+import lifeapplication.demo.controllers.exceptionhanlers.exceptions.NotFoundRuntimeException;
 import lifeapplication.demo.dto.CourseDto;
 import lifeapplication.demo.dto.SpecificationRequest;
 import lifeapplication.demo.dto.mapper.ManualCourseMapper;
@@ -61,7 +62,7 @@ public class CourseService implements BaseService<CourseDto> {
     }
 
     public CourseEntity getEntityById(Long id) {
-        return courseRepository.findById(id).get();
+        return courseRepository.findById(id).orElseThrow(()->new NotFoundRuntimeException(id, "Course can't be found"));
     }
 
     @Override

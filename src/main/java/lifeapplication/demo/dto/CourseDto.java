@@ -18,5 +18,9 @@ public class CourseDto extends BaseDto {
 
     private Long price;
 
+    private Long beginDate;
+
+    private Long endDate;
+
     private List<SectionDto> sections = new ArrayList<>();
 }

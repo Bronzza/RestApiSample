@@ -1,5 +1,6 @@
 package lifeapplication.demo.controllers;
 
+import lifeapplication.demo.controllers.exceptionhanlers.BaseHandler;
 import lifeapplication.demo.dto.CourseDto;
 import lifeapplication.demo.dto.SpecificationRequest;
 import lifeapplication.demo.services.CourseService;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/course")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class CourseController {
+public class CourseController extends BaseHandler {
 
     private final CourseService courseService;
 

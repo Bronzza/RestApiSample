@@ -1,0 +1,5 @@
+ALTER TABLE users ADD COLUMN active BOOLEAN;
+
+ALTER TABLE course ADD COLUMN begin_date BIGINT;
+
+ALTER TABLE course ADD COLUMN end_date BIGINT;
