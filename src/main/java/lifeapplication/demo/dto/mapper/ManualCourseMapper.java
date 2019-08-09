@@ -54,7 +54,7 @@ public class ManualCourseMapper implements AbstractMapper<CourseEntity, CourseDt
                         .collect(Collectors.toList()));
     }
 
-    public List<CourseDto> toListDto (List <CourseEntity> listOfEntities){
+    public List<CourseDto> toListDto(List<CourseEntity> listOfEntities) {
         return listOfEntities.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());

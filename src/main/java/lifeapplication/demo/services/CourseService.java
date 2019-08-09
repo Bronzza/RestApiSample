@@ -25,7 +25,7 @@ import static lifeapplication.demo.dto.SpecificationTransformer.buildCriteria;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CourseService implements BaseService<CourseDto> {
 
-    private static final ListCache <CourseEntity, SpecificationRequest> CACHE = new ListCache<>();
+    private static final ListCache<CourseEntity, SpecificationRequest> CACHE = new ListCache<>();
 
     private final CourseRepository courseRepository;
 
@@ -42,7 +42,7 @@ public class CourseService implements BaseService<CourseDto> {
     }
 
     @PostConstruct
-    private void initCache(){
+    private void initCache() {
         CACHE.initFunctions(this::getAllByRequest, this::getAllByIds);
     }
 
@@ -62,7 +62,7 @@ public class CourseService implements BaseService<CourseDto> {
     }
 
     public CourseEntity getEntityById(Long id) {
-        return courseRepository.findById(id).orElseThrow(()->new NotFoundRuntimeException(id, "Course can't be found"));
+        return courseRepository.findById(id).orElseThrow(() -> new NotFoundRuntimeException(id, "Course can't be found"));
     }
 
     @Override
@@ -73,16 +73,16 @@ public class CourseService implements BaseService<CourseDto> {
 
     private List<CourseEntity> getAllByRequest(SpecificationRequest request) {
         SpecificationCriteria criteria = buildCriteria(request);
-        Specification <CourseEntity> specification = courseSpecificationFactory.build(criteria);
+        Specification<CourseEntity> specification = courseSpecificationFactory.build(criteria);
         return courseRepository.findAll(specification);
     }
 
-    private List<CourseEntity> getAllByRequestWithCach(SpecificationRequest request){
-       return CACHE.getEntities(request);
+    private List<CourseEntity> getAllByRequestWithCach(SpecificationRequest request) {
+        return CACHE.getEntities(request);
     }
 
     @Transactional
-    public List <CourseDto> getAll (SpecificationRequest request){
+    public List<CourseDto> getAll(SpecificationRequest request) {
         return courseMapper.toListDto(getAllByRequestWithCach(request));
     }
 }

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 interface AbstractMapper<E extends CreatebleEntity, D extends BaseDto> {
 
-   abstract public E toEntity(D dto);
+    abstract public E toEntity(D dto);
 
-    public D toDto (E entity);
+    public D toDto(E entity);
 }

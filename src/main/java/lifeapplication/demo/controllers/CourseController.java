@@ -4,11 +4,14 @@ import lifeapplication.demo.controllers.exceptionhanlers.BaseHandler;
 import lifeapplication.demo.dto.CourseDto;
 import lifeapplication.demo.dto.SpecificationRequest;
 import lifeapplication.demo.services.CourseService;
-import lifeapplication.demo.services.SectionService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -30,8 +33,8 @@ public class CourseController extends BaseHandler {
         return "redirect:/course";
     }
 
-    @GetMapping (path = "/{id}")
-    public CourseDto findCourseDtoById (@PathVariable ("id") Long id){
+    @GetMapping(path = "/{id}")
+    public CourseDto findCourseDtoById(@PathVariable("id") Long id) {
         return courseService.getById(id);
     }
 

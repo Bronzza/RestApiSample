@@ -26,7 +26,7 @@ public class ManualSectionMapper implements AbstractMapper<SectionEntity, Sectio
     public SectionDto toDto(SectionEntity entity) {
         SectionDto sectionDto = new SectionDto();
         if (Objects.nonNull(entity.getId())) {
-            return  sectionDto
+            return sectionDto
                     .setName(entity.getName())
                     .setCourseId(entity.getCourse().getId());
         }

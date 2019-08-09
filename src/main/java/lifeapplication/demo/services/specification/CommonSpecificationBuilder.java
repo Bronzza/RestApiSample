@@ -1,12 +1,10 @@
 package lifeapplication.demo.services.specification;
 
-import lifeapplication.demo.utils.SpecificationCriteriaUtil;
 import org.springframework.data.jpa.domain.Specification;
-
 
 import java.util.Objects;
 
-import static lifeapplication.demo.utils.SpecificationCriteriaUtil.*;
+import static lifeapplication.demo.utils.SpecificationCriteriaUtil.buildRange;
 
 public class CommonSpecificationBuilder<T> {
     private static final String KEY_NAME = "name";
@@ -21,7 +19,7 @@ public class CommonSpecificationBuilder<T> {
                 Objects.isNull(name) ? null : criteriaBuilder.like(root.get(KEY_NAME), name + "%"));
     }
 
-    private Specification <T> buildCreatedDateRange (SpecificationCriteria criteria){
-        return buildRange (criteria.getCreatedDateStart(), criteria.getCreatedDateEnd(), (root) -> root.get(CREATED_DATE_KEY));
+    private Specification<T> buildCreatedDateRange(SpecificationCriteria criteria) {
+        return buildRange(criteria.getCreatedDateStart(), criteria.getCreatedDateEnd(), (root) -> root.get(CREATED_DATE_KEY));
     }
 }

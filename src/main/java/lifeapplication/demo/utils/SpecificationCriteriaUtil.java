@@ -4,8 +4,6 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
 import java.util.Objects;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

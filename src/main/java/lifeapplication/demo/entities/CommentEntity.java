@@ -1,11 +1,17 @@
 package lifeapplication.demo.entities;
 
 import lifeapplication.demo.entities.parrentEntities.CreatebleEntity;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Cascade;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "comment")
@@ -13,7 +19,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@Accessors (chain = true)
+@Accessors(chain = true)
 public class CommentEntity extends CreatebleEntity {
 
     @Column(name = "content")

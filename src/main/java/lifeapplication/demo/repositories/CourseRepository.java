@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface CourseRepository extends JpaRepository <CourseEntity, Long>, JpaSpecificationExecutor<CourseEntity> {
+public interface CourseRepository extends JpaRepository<CourseEntity, Long>, JpaSpecificationExecutor<CourseEntity> {
     List<CourseEntity> findAllByIdIn(List<Long> listId);
 }

@@ -9,6 +9,6 @@ public class CreatedDateListener {
 
     @PrePersist
     public void createDate(CreatebleEntity createbleEntity) {
-    createbleEntity.setCreatedDate(new Date().getTime());
+        createbleEntity.setCreatedDate(new Date().getTime());
     }
 }
